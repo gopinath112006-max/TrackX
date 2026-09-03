@@ -59,3 +59,22 @@ app.include_router(analysis.router)
 app.include_router(audit.router)
 app.include_router(export.router)
 app.include_router(progress.router)
+
+# Optional: serve the built frontend (frontend/dist) from the same origin.
+# Turn on with TRACELINE_SERVE_FRONTEND=1 so a single host (e.g. Replit) can
+# serve the SPA and /api together, without cross-origin CORS. Enabled only when
+# a production build exists; ignored during local dev / Docker.
+if os.environ.get("TRACELINE_SERVE_FRONTEND", "").strip() == "1":
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import FileResponse
+
+    _dist = os.path.normpath(os.path.join(BASE_DIR, "..", "..", "frontend", "dist"))
+    if os.path.isdir(_dist):
+        app.mount("/assets", StaticFiles(directory=os.path.join(_dist, "assets")), name="assets")
+
+        @app.get("/{full_path:path}", include_in_schema=False)
+        def spa_fallback(full_path: str):
+            candidate = os.path.normpath(os.path.join(_dist, full_path))
+            if os.path.isfile(candidate):
+                return FileResponse(candidate)
+            return FileResponse(os.path.join(_dist, "index.html"))

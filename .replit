@@ -1,0 +1,7 @@
+# Replit run configuration for TraceLine.
+# Bootstraps dependencies, builds the SPA, and runs the API (which also serves
+# the built frontend from the same origin).
+entrypoint = "replit_start.sh"
+
+[run]
+command = "bash replit_start.sh"
