@@ -1,0 +1,12 @@
+{
+  "id": "stolen_credentials",
+  "name": "Compromised Account Login (Stolen Credentials)",
+  "description": "Stolen service-account credentials are used from an external IP at 3 AM. The account fails to log in from an internal workstation, then a successful login originates from a one-off public IP, followed by sensitive-file collection.",
+  "category": "stolen_credentials",
+  "expected_findings": [
+    "Suspicious login source",
+    "Possible unauthorized sensitive-file access",
+    "Possible data collection",
+    "Login outside normal activity window"
+  ]
+}

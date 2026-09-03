@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+frontend/dist/
+npm-debug.log*
+
+# Runtime / DB
+backend/traceline.db
+*.sqlite3
+*.sqlite
+
+# Env / secrets
+.env
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local tooling / internal working docs (not part of the submission)
+.sixth/
+XO_CODE_2026_PS3_ANALYSIS.md

@@ -1,0 +1,25 @@
+timestamp,user,source_host,file,action,status
+2026-09-03 07:01:22,developer_alice,workstation-alice,project_plan.xlsx,READ,SUCCESS
+2026-09-03 07:31:44,developer_bob,workstation-bob,code_review.docx,READ,SUCCESS
+2026-09-03 08:01:18,dba_carol,workstation-carol,db_maintenance.log,READ,SUCCESS
+2026-09-03 08:16:05,developer_alice,web-server-01,web_config.xml,READ,SUCCESS
+2026-09-03 08:31:22,developer_bob,app-server-01,app_config.yaml,READ,SUCCESS
+2026-09-03 09:01:33,dba_carol,db-server-01,db_config.ini,READ,SUCCESS
+2026-09-03 09:31:44,developer_alice,web-server-01,access_log.txt,READ,SUCCESS
+2026-09-03 10:01:55,developer_bob,app-server-01,error_log.txt,READ,SUCCESS
+2026-09-03 10:31:01,dba_carol,db-server-01,db_health.log,READ,SUCCESS
+2026-09-03 11:16:12,developer_alice,workstation-alice,meeting_notes.docx,READ,SUCCESS
+2026-09-03 13:01:22,dba_carol,workstation-carol,backup_schedule.xlsx,READ,SUCCESS
+2026-09-03 17:00:33,developer_bob,workstation-bob,project_plan.xlsx,READ,SUCCESS
+2026-09-03 20:00:45,svc_backup,web-server-01,web_config.xml,READ,SUCCESS
+2026-09-03 20:01:02,svc_backup,web-server-01,.htpasswd,READ,SUCCESS
+2026-09-03 20:01:18,svc_backup,web-server-01,ssl_cert.key,READ,SUCCESS
+2026-09-03 20:04:01,svc_backup,app-server-01,app_config.yaml,READ,SUCCESS
+2026-09-03 20:04:22,svc_backup,app-server-01,api_keys.env,READ,SUCCESS
+2026-09-03 20:04:45,svc_backup,app-server-01,db_credentials.json,READ,SUCCESS
+2026-09-03 20:08:01,svc_backup,db-server-01,db_config.ini,READ,SUCCESS
+2026-09-03 20:08:22,svc_backup,db-server-01,admin_passwords.txt,READ,SUCCESS
+2026-09-03 20:10:05,svc_backup,db-server-01,database_dump.sql,READ,SUCCESS
+2026-09-03 20:10:33,svc_backup,db-server-01,database_dump.sql,READ,SUCCESS
+2026-09-03 20:20:15,developer_alice,workstation-alice,project_plan.xlsx,READ,SUCCESS
+2026-09-03 20:30:44,dba_carol,workstation-carol,db_maintenance.log,READ,SUCCESS

@@ -1,0 +1,173 @@
+# TraceLine Analysis Configuration
+# =================================
+# Externalized heuristics for the TraceLine investigation pipeline (NFR-M-03).
+# Forensic experts can tune detection thresholds, confidence weights, and
+# correlation windows here WITHOUT modifying source code (FR-15.1 / NFR-R-01).
+#
+# Defaults mirror the values historically hardcoded in the analysis modules,
+# so behavior is bit-for-bit reproducible unless a value is changed here.
+
+# ---------------------------------------------------------------------------
+# Confidence scoring (FR-10.1 / FR-10.3)
+#   C = min(1.0, BaseScore + w_corrob*(N_sources-1) + w_spec*S_pattern
+#               - P_gap - P_conflict)
+# ---------------------------------------------------------------------------
+confidence:
+  weights:
+    w_corroboration: 0.15     # weight per additional corroborating source
+    w_specificity: 0.15       # weight of the pattern-specificity term
+    p_gap_default: 0.10       # default penalty for temporal gaps / inferred hops
+    p_conflict_min: 0.30      # minimum conflict/anti-forensics penalty
+  gap_threshold_seconds: 3600 # horizon for treating two events as temporally gapped
+  base_scores:                # starting BaseScore by finding severity
+    CRITICAL: 0.72
+    HIGH: 0.66
+    MEDIUM: 0.58
+    LOW: 0.46
+    INFO: 0.40
+    default: 0.50
+  specificity:                # pattern specificity S_pattern (0.0-1.0)
+    brute_force: 0.9
+    sensitive_access: 0.7
+    exfiltration: 1.0
+    lateral_movement: 0.8
+    privilege_escalation: 0.9
+    persistence: 0.8
+    data_collection: 0.6
+    unusual_login: 0.5
+    unusual_time: 0.3
+    default: 0.5
+  label:                      # discrete confidence classification thresholds
+    high_min: 0.80
+    medium_min: 0.50
+  risk:                       # overall investigation risk mapping (0-100 score)
+    high_confidence_min: 75
+    medium_confidence_min: 50
+
+# ---------------------------------------------------------------------------
+# Detection rules (FR-05.1, FR-06.3, FR-06.4 and general heuristics)
+# ---------------------------------------------------------------------------
+detection:
+  sensitive_file_keywords:
+    - student
+    - password
+    - credential
+    - database
+    - financial
+    - payment
+    - social_security
+    - medical
+    - salary
+    - tax
+    - customer
+    - credit
+    - secret
+    - confidential
+    - private
+    - personal
+    - employee
+    - dump
+    - backup
+    - sql
+    - xlsx
+    - db
+    - csv
+    - key
+    - auth
+  normal_activity:
+    start_hour: 8
+    end_hour: 20
+  brute_force:                 # FR-05.1: K failures within W_auth seconds
+    failed_login_burst_threshold: 5
+    window_seconds: 900
+  file_download:
+    burst_threshold: 3
+  exfiltration:
+    threshold_mb: 100
+  lateral_movement:
+    host_threshold: 2
+  privilege_escalation:        # FR-06.3 signatures
+    binaries:
+      - sudo
+      - "su "
+      - runas
+      - uac_bypass
+      - seclogon
+      - token_impersonation
+      - impersonate
+      - setuid
+      - setgid
+      - psexec
+      - enable_admin
+    group_actions:
+      - add to sudoers
+      - add to admins
+      - add to domain admins
+      - group membership
+      - add_member
+      - add group member
+      - promote
+    elevated_role_markers:
+      - admin
+      - root
+      - sudo
+      - system
+      - domain admin
+      - superuser
+  persistence:                 # FR-06.4 signatures
+    scheduled_terms:
+      - scheduled task
+      - create schedule
+      - cron
+      - at command
+      - schtasks
+      - register task
+      - task scheduler
+    service_terms:
+      - create service
+      - install service
+      - new service
+      - start service
+      - sc create
+      - systemd unit
+      - create daemon
+    startup_terms:
+      - startup
+      - autorun
+      - run key
+      - "run\\"
+      - init.d
+      - rc.local
+      - startup folder
+      - "hkcu\\software\\microsoft\\windows\\currentversion\\run"
+      - "hklm\\software\\microsoft\\windows\\currentversion\\run"
+    account_terms:
+      - create user
+      - add user
+      - new local user
+      - create account
+      - add account
+      - net user
+      - create backdoor
+
+# ---------------------------------------------------------------------------
+# Correlation engine (FR-07.x)
+# ---------------------------------------------------------------------------
+correlation:
+  default_time_window_min: 10
+  cross_source_bonus: 10
+  data_flow_window_min: 15
+
+# ---------------------------------------------------------------------------
+# Relationship graph / attack path tracing (FR-06.1)
+# ---------------------------------------------------------------------------
+relationships:
+  max_inferred_edges: 40
+  attack_path_time_window_seconds: 259200   # 72 hours
+
+# ---------------------------------------------------------------------------
+# Ingestion (NFR-P-02 parallelization knobs)
+# ---------------------------------------------------------------------------
+ingestion:
+  parallel_workers: 0       # 0 => auto (min(8, CPU count))
+  chunk_rows: 100000        # rows per chunk when parallelizing large CSV files

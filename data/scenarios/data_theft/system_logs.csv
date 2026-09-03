@@ -1,0 +1,23 @@
+timestamp,source_host,event_type,action,details,severity
+2026-09-02 07:45:00,workstation-james,system_startup,boot,System started successfully,INFO
+2026-09-02 07:45:15,workstation-james,user_login,authentication,User james authenticated,INFO
+2026-09-02 08:00:22,workstation-lisa,system_startup,boot,System started successfully,INFO
+2026-09-02 08:00:38,workstation-lisa,user_login,authentication,User lisa authenticated,INFO
+2026-09-02 09:12:10,mail-server,service_status,running,Mail service healthy,INFO
+2026-09-02 10:30:00,report-server,service_status,running,Report generation service healthy,INFO
+2026-09-02 12:00:00,server02,service_status,running,All services healthy,INFO
+2026-09-02 14:00:00,workstation-james,user_login,authentication,User james authenticated,INFO
+2026-09-02 15:20:30,workstation-lisa,user_login,authentication,User lisa authenticated,INFO
+2026-09-02 22:00:15,server02,user_login,authentication,User analyst_mike authenticated,INFO
+2026-09-02 22:03:10,server02,file_copy,read,File customer_database.csv accessed,INFO
+2026-09-02 22:04:22,server02,file_copy,read,File payment_records.xlsx accessed,INFO
+2026-09-02 22:05:30,server02,file_copy,read,File social_security_numbers.csv accessed,INFO
+2026-09-02 22:06:40,server02,file_copy,read,File medical_records.db accessed,INFO
+2026-09-02 22:07:50,server02,file_copy,read,File passwords_dump.csv accessed,INFO
+2026-09-02 22:09:01,server02,file_copy,copy,File copy operation initiated customer_database.csv,WARNING
+2026-09-02 22:11:15,server02,file_copy,copy,File copy operation initiated payment_records.xlsx,WARNING
+2026-09-02 22:12:28,server02,network_connection,outbound,Outbound connection to 203.0.113.50 established,WARNING
+2026-09-02 22:15:44,server02,network_connection,closed,Connection to 203.0.113.50 closed,INFO
+2026-09-02 22:16:50,server02,user_logout,authentication,User analyst_mike logged out,INFO
+2026-09-02 22:30:05,workstation-james,user_login,authentication,User james authenticated,INFO
+2026-09-02 23:00:20,workstation-lisa,user_login,authentication,User lisa authenticated,INFO

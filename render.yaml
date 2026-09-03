@@ -1,0 +1,51 @@
+# Render.com blueprint for TraceLine (hackathon prototype).
+# Two services: a FastAPI/uvicorn API and a static SPA frontend.
+# Docs: https://render.com/docs/blueprint-spec
+
+databases: []  # SQLite persistent disk is used (no external Postgres required).
+
+services:
+  # ---- Backend API -----------------------------------------------------
+  - type: web
+    name: traceline-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    healthCheckPath: /api/health
+    envVars:
+      # Persistent SQLite DB + audit log live on the disk.
+      - key: TRACELINE_DATABASE_URL
+        value: sqlite:////app/data/traceline.db
+      - key: TRACELINE_AUDIT_LOG
+        value: /app/data/audit.log
+      # Allow the deployed frontend origin (from DATABASE_URL-style service URL).
+      # Replace <frontend-url> after the UI service is created, or use the
+      # value below and set explicitly on first deploy.
+      - key: TRACELINE_ALLOWED_ORIGINS
+        sync: false
+    disk:
+      name: traceline-data
+      mountPath: /app/data
+      sizeGB: 1
+
+  # ---- Frontend SPA ----------------------------------------------------
+  - type: web
+    name: traceline-ui
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    # Vite preview serves the built SPA with client-side routing fallback.
+    startCommand: npx vite preview --host 0.0.0.0 --port 10000
+    healthCheckPath: /
+    envVars:
+      # The deployed backend URL (set to https://traceline-api.onrender.com).
+      # Baked into the bundle at build time so '../api' calls hit the API host.
+      - key: VITE_API_BASE
+        sync: false
+    disk:
+      name: traceline-ui-cache
+      mountPath: /opt/render/project/.npm-cache
+      sizeGB: 1

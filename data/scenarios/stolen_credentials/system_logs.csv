@@ -1,0 +1,6 @@
+timestamp,user,source_host,destination_host,action,status
+2026-09-03 08:10:02,alice,workstation-alice,workstation-alice,run-app,SUCCESS
+2026-09-03 09:50:00,bob,workstation-bob,workstation-bob,run-job,SUCCESS
+2026-09-03 14:20:15,alice,workstation-alice,workstation-alice,run-backup,SUCCESS
+2026-09-03 03:49:05,svc_backup,198.51.100.23,backup-srv,execute_script,SUCCESS
+2026-09-03 03:49:40,svc_backup,198.51.100.23,backup-srv,spawn_process,SUCCESS

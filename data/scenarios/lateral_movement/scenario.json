@@ -1,0 +1,7 @@
+{
+  "id": "lateral_movement",
+  "name": "Lateral Movement Attack",
+  "description": "Attacker gains initial access to one server, then moves laterally through the network to reach the database server.",
+  "category": "lateral_movement",
+  "expected_findings": ["Possible lateral movement", "Multiple affected systems", "Database access compromise"]
+}

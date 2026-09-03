@@ -1,0 +1,21 @@
+timestamp,user,source_ip,destination_host,action,status
+2026-09-02 07:45:11,james,192.168.1.15,workstation-james,LOGIN,SUCCESS
+2026-09-02 08:00:33,lisa,192.168.1.25,workstation-lisa,LOGIN,SUCCESS
+2026-09-02 08:30:22,james,192.168.1.15,workstation-james,LOGOUT,SUCCESS
+2026-09-02 09:12:05,lisa,192.168.1.25,mail-server,LOGIN,SUCCESS
+2026-09-02 09:45:18,james,192.168.1.15,report-server,LOGIN,SUCCESS
+2026-09-02 10:00:44,lisa,192.168.1.25,mail-server,LOGOUT,SUCCESS
+2026-09-02 10:30:11,james,192.168.1.15,report-server,LOGOUT,SUCCESS
+2026-09-02 11:15:33,lisa,192.168.1.25,workstation-lisa,LOGIN,SUCCESS
+2026-09-02 12:00:00,james,192.168.1.15,workstation-james,LOGOUT,SUCCESS
+2026-09-02 13:30:22,lisa,192.168.1.25,workstation-lisa,LOGOUT,SUCCESS
+2026-09-02 14:00:15,james,192.168.1.15,workstation-james,LOGIN,SUCCESS
+2026-09-02 15:20:44,lisa,192.168.1.25,workstation-lisa,LOGIN,SUCCESS
+2026-09-02 16:00:33,james,192.168.1.15,workstation-james,LOGOUT,SUCCESS
+2026-09-02 17:00:00,lisa,192.168.1.25,workstation-lisa,LOGOUT,SUCCESS
+2026-09-02 21:55:00,analyst_mike,192.168.1.75,server02,LOGIN,FAILED
+2026-09-02 21:56:30,analyst_mike,192.168.1.75,server02,LOGIN,FAILED
+2026-09-02 22:00:12,analyst_mike,192.168.1.75,server02,LOGIN,SUCCESS
+2026-09-02 22:16:45,analyst_mike,192.168.1.75,server02,LOGOUT,SUCCESS
+2026-09-02 22:30:00,james,192.168.1.15,workstation-james,LOGIN,SUCCESS
+2026-09-02 23:00:11,lisa,192.168.1.25,workstation-lisa,LOGIN,SUCCESS

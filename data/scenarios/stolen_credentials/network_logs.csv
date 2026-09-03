@@ -1,0 +1,11 @@
+timestamp,source_ip,destination_ip,source_host,destination_host,action,bytes_transferred
+2026-09-03 08:08:00,172.16.5.20,172.16.5.100,workstation-alice,mail-server,RECEIVE,16384
+2026-09-03 09:04:10,172.16.5.20,172.16.5.100,workstation-alice,mail-server,RECEIVE,20480
+2026-09-03 14:13:20,172.16.5.20,172.16.5.100,workstation-alice,mail-server,RECEIVE,12288
+2026-09-03 03:43:10,172.16.5.10,198.51.100.23,backup-srv,external-host,CONNECT,0
+2026-09-03 03:43:40,172.16.5.10,198.51.100.23,backup-srv,external-host,SEND,32768
+2026-09-03 03:44:20,172.16.5.10,198.51.100.23,backup-srv,external-host,CONNECT,0
+2026-09-03 03:45:35,172.16.5.10,198.51.100.23,backup-srv,external-host,SEND,40960
+2026-09-03 03:46:10,172.16.5.10,198.51.100.23,backup-srv,external-host,CONNECT,0
+2026-09-03 03:47:05,172.16.5.10,198.51.100.23,backup-srv,external-host,SEND,24576
+2026-09-03 03:48:22,172.16.5.10,198.51.100.23,backup-srv,external-host,SEND,61440

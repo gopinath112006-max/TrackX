@@ -1,0 +1,23 @@
+timestamp,user,source_host,file,action,status
+2026-09-02 07:46:22,james,workstation-james,quarterly_report.pdf,READ,SUCCESS
+2026-09-02 08:01:44,lisa,workstation-lisa,project_plan.xlsx,READ,SUCCESS
+2026-09-02 09:12:33,lisa,workstation-lisa,inbox_summary.txt,READ,SUCCESS
+2026-09-02 09:46:01,james,workstation-james,sales_data.csv,READ,SUCCESS
+2026-09-02 10:31:22,james,workstation-james,meeting_notes.docx,READ,SUCCESS
+2026-09-02 11:16:18,lisa,workstation-lisa,budget_2026.xlsx,READ,SUCCESS
+2026-09-02 13:31:44,lisa,workstation-lisa,team_roster.docx,READ,SUCCESS
+2026-09-02 14:01:30,james,workstation-james,report.pdf,READ,SUCCESS
+2026-09-02 15:21:55,lisa,workstation-lisa,project_plan.xlsx,READ,SUCCESS
+2026-09-02 22:03:05,analyst_mike,server02,customer_database.csv,READ,SUCCESS
+2026-09-02 22:03:44,analyst_mike,server02,customer_database.csv,READ,SUCCESS
+2026-09-02 22:04:18,analyst_mike,server02,payment_records.xlsx,READ,SUCCESS
+2026-09-02 22:04:55,analyst_mike,server02,payment_records.xlsx,READ,SUCCESS
+2026-09-02 22:05:22,analyst_mike,server02,social_security_numbers.csv,READ,SUCCESS
+2026-09-02 22:05:58,analyst_mike,server02,social_security_numbers.csv,READ,SUCCESS
+2026-09-02 22:06:33,analyst_mike,server02,medical_records.db,READ,SUCCESS
+2026-09-02 22:07:05,analyst_mike,server02,medical_records.db,READ,SUCCESS
+2026-09-02 22:07:44,analyst_mike,server02,passwords_dump.csv,READ,SUCCESS
+2026-09-02 22:08:11,analyst_mike,server02,passwords_dump.csv,READ,SUCCESS
+2026-09-02 22:08:48,analyst_mike,server02,customer_database.csv,READ,SUCCESS
+2026-09-02 22:30:15,james,workstation-james,report.pdf,READ,SUCCESS
+2026-09-02 23:01:22,lisa,workstation-lisa,meeting_notes.docx,READ,SUCCESS

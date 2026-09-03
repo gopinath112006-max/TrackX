@@ -1,0 +1,26 @@
+timestamp,source_ip,destination_ip,source_host,destination_host,action,bytes_transferred
+2026-09-03 07:01:00,10.0.0.15,10.0.0.100,workstation-alice,mail-server,CONNECT,0
+2026-09-03 07:31:30,10.0.0.25,10.0.0.100,workstation-bob,mail-server,CONNECT,0
+2026-09-03 08:01:05,10.0.0.35,10.0.0.100,workstation-carol,mail-server,CONNECT,0
+2026-09-03 08:15:55,10.0.0.15,10.0.0.10,workstation-alice,web-server-01,CONNECT,0
+2026-09-03 08:31:10,10.0.0.25,10.0.0.20,workstation-bob,app-server-01,CONNECT,0
+2026-09-03 09:01:20,10.0.0.35,10.0.0.30,workstation-carol,db-server-01,CONNECT,0
+2026-09-03 09:01:45,10.0.0.35,10.0.0.30,workstation-carol,db-server-01,RECEIVE,51200
+2026-09-03 11:16:30,10.0.0.15,10.0.0.100,workstation-alice,mail-server,RECEIVE,18500
+2026-09-03 13:01:40,10.0.0.35,10.0.0.100,workstation-carol,mail-server,RECEIVE,22000
+2026-09-03 17:00:55,10.0.0.25,10.0.0.100,workstation-bob,mail-server,RECEIVE,14200
+2026-09-03 20:01:30,10.0.0.10,10.0.0.20,web-server-01,app-server-01,CONNECT,0
+2026-09-03 20:01:55,10.0.0.10,10.0.0.20,web-server-01,app-server-01,SEND,4096
+2026-09-03 20:02:18,10.0.0.10,10.0.0.20,web-server-01,app-server-01,RECEIVE,8192
+2026-09-03 20:04:30,10.0.0.20,10.0.0.30,app-server-01,db-server-01,CONNECT,0
+2026-09-03 20:04:55,10.0.0.20,10.0.0.30,app-server-01,db-server-01,SEND,16384
+2026-09-03 20:05:12,10.0.0.20,10.0.0.30,app-server-01,db-server-01,RECEIVE,32768
+2026-09-03 20:08:33,10.0.0.30,10.0.0.30,db-server-01,db-server-01,SEND,8192
+2026-09-03 20:10:15,10.0.0.30,10.0.0.30,db-server-01,db-server-01,RECEIVE,10485760
+2026-09-03 20:12:01,10.0.0.30,198.51.100.75,db-server-01,external-server,SEND,5242880
+2026-09-03 20:12:33,10.0.0.30,198.51.100.75,db-server-01,external-server,SEND,10485760
+2026-09-03 20:13:05,10.0.0.30,198.51.100.75,db-server-01,external-server,SEND,15728640
+2026-09-03 20:13:44,10.0.0.30,198.51.100.75,db-server-01,external-server,SEND,10485760
+2026-09-03 20:14:22,10.0.0.30,198.51.100.75,db-server-01,external-server,SEND,5242880
+2026-09-03 20:20:30,10.0.0.15,10.0.0.100,workstation-alice,mail-server,RECEIVE,9800
+2026-09-03 20:30:55,10.0.0.35,10.0.0.100,workstation-carol,mail-server,RECEIVE,12500

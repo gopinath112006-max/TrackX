@@ -1,0 +1,18 @@
+timestamp,source_ip,destination_ip,source_host,destination_host,action,bytes_transferred
+2026-09-02 07:45:33,192.168.1.15,192.168.1.100,workstation-james,mail-server,CONNECT,0
+2026-09-02 08:00:55,192.168.1.25,192.168.1.100,workstation-lisa,mail-server,CONNECT,0
+2026-09-02 09:12:22,192.168.1.25,192.168.1.100,workstation-lisa,mail-server,RECEIVE,22000
+2026-09-02 09:45:44,192.168.1.15,192.168.1.200,workstation-james,report-server,CONNECT,0
+2026-09-02 09:46:30,192.168.1.15,192.168.1.200,workstation-james,report-server,RECEIVE,1048576
+2026-09-02 14:02:10,192.168.1.15,192.168.1.200,workstation-james,report-server,RECEIVE,524288
+2026-09-02 22:10:05,192.168.1.75,203.0.113.50,server02,external-server,SEND,10485760
+2026-09-02 22:10:44,192.168.1.75,203.0.113.50,server02,external-server,SEND,20971520
+2026-09-02 22:11:22,192.168.1.75,203.0.113.50,server02,external-server,SEND,31457280
+2026-09-02 22:12:01,192.168.1.75,203.0.113.50,server02,external-server,SEND,41943040
+2026-09-02 22:12:33,192.168.1.75,203.0.113.50,server02,external-server,SEND,52428800
+2026-09-02 22:13:11,192.168.1.75,203.0.113.50,server02,external-server,SEND,41943040
+2026-09-02 22:13:55,192.168.1.75,203.0.113.50,server02,external-server,SEND,31457280
+2026-09-02 22:14:30,192.168.1.75,203.0.113.50,server02,external-server,SEND,20971520
+2026-09-02 22:15:05,192.168.1.75,203.0.113.50,server02,external-server,SEND,10485760
+2026-09-02 22:30:33,192.168.1.15,192.168.1.100,workstation-james,mail-server,RECEIVE,8500
+2026-09-02 23:01:44,192.168.1.25,192.168.1.100,workstation-lisa,mail-server,RECEIVE,11200

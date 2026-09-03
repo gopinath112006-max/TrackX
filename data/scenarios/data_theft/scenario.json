@@ -1,0 +1,7 @@
+{
+  "id": "data_theft",
+  "name": "Data Theft & Exfiltration",
+  "description": "An authenticated user accesses multiple sensitive database files and exfiltrates data via a large outbound transfer.",
+  "category": "data_theft",
+  "expected_findings": ["Sensitive data access", "Multiple file downloads", "Possible data exfiltration"]
+}

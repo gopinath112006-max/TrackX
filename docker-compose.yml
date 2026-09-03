@@ -1,0 +1,37 @@
+# TraceLine two-container deployment (NFR-D-01 / NFR-D-02)
+#   traceline-api : FastAPI backend (port 8000, internal)
+#   traceline-ui  : nginx serving the React SPA (port 5173)
+#
+# On an offline/air-gapped analyst workstation: docker compose up --build
+# Persistent state (SQLite DB + append-only audit log) lives on the named
+# volume `traceline_data`, keeping evidence strictly local (NFR-D-01).
+
+services:
+  traceline-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: traceline-api
+    environment:
+      TRACELINE_DATABASE_URL: sqlite:////app/data/traceline.db
+      TRACELINE_AUDIT_LOG: /app/data/audit.log
+      TRACELINE_ALLOWED_ORIGINS: ${TRACELINE_ALLOWED_ORIGINS:-http://localhost:5173}
+    volumes:
+      - traceline_data:/app/data
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  traceline-ui:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: traceline-ui
+    depends_on:
+      - traceline-api
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+
+volumes:
+  traceline_data:

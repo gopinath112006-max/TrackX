@@ -1,0 +1,20 @@
+timestamp,user,source_ip,destination_host,action,status
+2026-09-03 08:05:11,alice,172.16.5.20,workstation-alice,LOGIN,SUCCESS
+2026-09-03 08:20:44,bob,172.16.5.30,workstation-bob,LOGIN,SUCCESS
+2026-09-03 09:00:12,alice,172.16.5.20,mail-server,LOGIN,SUCCESS
+2026-09-03 09:45:33,bob,172.16.5.30,report-server,LOGIN,SUCCESS
+2026-09-03 10:15:22,alice,172.16.5.20,workstation-alice,LOGOUT,SUCCESS
+2026-09-03 11:30:07,bob,172.16.5.30,workstation-bob,LOGOUT,SUCCESS
+2026-09-03 12:00:41,alice,172.16.5.20,mail-server,LOGOUT,SUCCESS
+2026-09-03 13:25:18,bob,172.16.5.30,report-server,LOGOUT,SUCCESS
+2026-09-03 14:10:55,alice,172.16.5.20,workstation-alice,LOGIN,SUCCESS
+2026-09-03 15:05:33,bob,172.16.5.30,workstation-bob,LOGIN,SUCCESS
+2026-09-03 16:40:02,alice,172.16.5.20,workstation-alice,LOGOUT,SUCCESS
+2026-09-03 17:10:26,bob,172.16.5.30,workstation-bob,LOGOUT,SUCCESS
+2026-09-03 03:40:11,svc_backup,172.16.5.10,backup-srv,LOGIN,FAILED
+2026-09-03 03:40:49,svc_backup,172.16.5.10,backup-srv,LOGIN,FAILED
+2026-09-03 03:41:20,svc_backup,172.16.5.10,backup-srv,LOGIN,FAILED
+2026-09-03 03:41:48,svc_backup,172.16.5.10,backup-srv,LOGIN,FAILED
+2026-09-03 03:42:15,svc_backup,172.16.5.10,backup-srv,LOGIN,FAILED
+2026-09-03 03:43:27,svc_backup,198.51.100.23,backup-srv,LOGIN,SUCCESS
+2026-09-03 03:55:00,alice,172.16.5.20,workstation-alice,LOGIN,SUCCESS

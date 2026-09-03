@@ -1,0 +1,26 @@
+timestamp,user,source_ip,destination_host,action,status
+2026-09-03 07:00:15,developer_alice,10.0.0.15,workstation-alice,LOGIN,SUCCESS
+2026-09-03 07:30:22,developer_bob,10.0.0.25,workstation-bob,LOGIN,SUCCESS
+2026-09-03 08:00:10,dba_carol,10.0.0.35,workstation-carol,LOGIN,SUCCESS
+2026-09-03 08:15:33,developer_alice,10.0.0.15,web-server-01,LOGIN,SUCCESS
+2026-09-03 08:30:44,developer_bob,10.0.0.25,app-server-01,LOGIN,SUCCESS
+2026-09-03 09:00:11,dba_carol,10.0.0.35,db-server-01,LOGIN,SUCCESS
+2026-09-03 09:30:22,developer_alice,10.0.0.15,web-server-01,LOGOUT,SUCCESS
+2026-09-03 10:00:33,developer_bob,10.0.0.25,app-server-01,LOGOUT,SUCCESS
+2026-09-03 10:30:44,dba_carol,10.0.0.35,db-server-01,LOGOUT,SUCCESS
+2026-09-03 11:15:00,developer_alice,10.0.0.15,workstation-alice,LOGIN,SUCCESS
+2026-09-03 12:00:22,developer_bob,10.0.0.25,workstation-bob,LOGOUT,SUCCESS
+2026-09-03 13:00:33,dba_carol,10.0.0.35,workstation-carol,LOGIN,SUCCESS
+2026-09-03 14:00:11,developer_alice,10.0.0.15,workstation-alice,LOGOUT,SUCCESS
+2026-09-03 15:00:44,dba_carol,10.0.0.35,workstation-carol,LOGOUT,SUCCESS
+2026-09-03 17:00:00,developer_bob,10.0.0.25,workstation-bob,LOGIN,SUCCESS
+2026-09-03 18:00:11,developer_bob,10.0.0.25,workstation-bob,LOGOUT,SUCCESS
+2026-09-03 19:55:00,svc_backup,10.0.0.50,web-server-01,LOGIN,FAILED
+2026-09-03 19:57:30,svc_backup,10.0.0.50,web-server-01,LOGIN,FAILED
+2026-09-03 20:00:12,svc_backup,10.0.0.50,web-server-01,LOGIN,SUCCESS
+2026-09-03 20:03:45,svc_backup,10.0.0.50,app-server-01,LOGIN,SUCCESS
+2026-09-03 20:06:18,svc_backup,10.0.0.50,db-server-01,LOGIN,FAILED
+2026-09-03 20:07:33,svc_backup,10.0.0.50,db-server-01,LOGIN,SUCCESS
+2026-09-03 20:15:00,svc_backup,10.0.0.50,db-server-01,LOGOUT,SUCCESS
+2026-09-03 20:20:00,developer_alice,10.0.0.15,workstation-alice,LOGIN,SUCCESS
+2026-09-03 20:30:11,dba_carol,10.0.0.35,workstation-carol,LOGIN,SUCCESS

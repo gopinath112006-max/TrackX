@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+tests/
+audit.log
+traceline.db
+*.db
+.env
+.venv/
+venv/

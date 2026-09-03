@@ -1,0 +1,7 @@
+{
+  "id": "brute_force",
+  "name": "Brute Force Account Compromise",
+  "description": "Attacker performs multiple failed login attempts against the admin account from IP 192.168.1.50, eventually succeeds, then accesses sensitive files.",
+  "category": "brute_force",
+  "expected_findings": ["Possible brute-force attack", "Account compromise", "Unauthorized file access"]
+}
