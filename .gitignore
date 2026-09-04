@@ -6,8 +6,7 @@ __pycache__/
 venv/
 env/
 
-# Vercel-generated Python build artifacts (regenerated from backend/requirements.txt)
-backend/pyproject.toml
+# Vercel-generated Python dependency lockfile (regenerated from backend/pyproject.toml)
 backend/uv.lock
 
 # Node
