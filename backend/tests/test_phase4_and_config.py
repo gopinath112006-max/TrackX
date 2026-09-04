@@ -195,12 +195,13 @@ def test_story_narrative_has_citations_and_inference_marks(client):
     assert len(story["limitations"]) > 0
 
 
-def test_audit_chain_integrity(client, tmp_path):
-    """FR-16.2: the append-only audit log must verify as a tamper-evident chain."""
-    log = tmp_path / "audit_test.log"
+def test_audit_chain_integrity(client):
+    """FR-16.2: the append-only audit log must verify as a tamper-evident chain.
+
+    Records are stored in the ``audit_log`` table (serverless-friendly) and
+    chained via SHA-256 hashes. Verifying the chain detects tampering.
+    """
     from app.services import audit_logger
-    original = audit_logger.AUDIT_LOG_PATH
-    audit_logger.AUDIT_LOG_PATH = str(log)
     audit_logger.reset_audit_log()
     try:
         audit_logger.log_action(action="test_action", investigation_id=1, details={"k": "v"})
@@ -210,7 +211,7 @@ def test_audit_chain_integrity(client, tmp_path):
         assert result["broken"] == 0
         assert result["total_records"] == 2
     finally:
-        audit_logger.AUDIT_LOG_PATH = original
+        audit_logger.reset_audit_log()
 
 
 def test_sse_progress_streams_pipeline_stages(client):

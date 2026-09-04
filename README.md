@@ -2,6 +2,8 @@
 
 TraceLine is a hackathon prototype/MVP: a threat-hunting and incident-investigation assistive tool for SOC analysts. It ingests timestamped security events from CSV/JSON/TXT, normalizes them, runs deterministic detection rules, and produces confidence-scored findings, a timeline, relationship graph, blast-radius estimate, attack story, report and exports — with hash-chained audit logging, a live SSE pipeline-progress UI, and YAML-tunable heuristics.
 
+**GitHub Repository:** https://github.com/gopinath112006-max/TrackX
+
 ## 1. Team Details
 
 | Field | Details |

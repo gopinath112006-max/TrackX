@@ -141,6 +141,19 @@ class Relationship(Base):
     evidence_event_ids: Mapped[str] = mapped_column(Text, nullable=False)
 
 
+class AuditLog(Base):
+    __tablename__ = "audit_log"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    ts: Mapped[str] = mapped_column(String(64), nullable=False)
+    action: Mapped[str] = mapped_column(String(100), nullable=False)
+    actor: Mapped[str] = mapped_column(String(255), nullable=False)
+    investigation_id: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    details: Mapped[str] = mapped_column(Text, nullable=False)
+    record_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    prev_hash: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
+
+
 _engine = None
 
 
@@ -149,15 +162,24 @@ def get_engine(database_url: str = "sqlite:///traceline.db"):
     if _engine is None:
         # Normalize Windows backslash paths for SQLAlchemy
         url = database_url.replace("\\", "/") if database_url.startswith("sqlite:///") else database_url
-        _engine = create_engine(url, echo=False)
+        _engine = create_engine(url, echo=False, pool_pre_ping=True)
 
-        @event.listens_for(_engine, "connect")
-        def _set_sqlite_pragma(dbapi_connection, _connection_record):
-            cursor = dbapi_connection.cursor()
-            cursor.execute("PRAGMA foreign_keys=ON")
-            cursor.close()
+        if url.startswith("sqlite"):
+            @event.listens_for(_engine, "connect")
+            def _set_sqlite_pragma(dbapi_connection, _connection_record):
+                cursor = dbapi_connection.cursor()
+                cursor.execute("PRAGMA foreign_keys=ON")
+                cursor.close()
 
     return _engine
+
+
+def reset_engine() -> None:
+    """Drop the cached engine (used by tests to switch DB backends)."""
+    global _engine
+    if _engine is not None:
+        _engine.dispose()
+        _engine = None
 
 
 def init_db(database_url: str = "sqlite:///traceline.db"):

@@ -43,9 +43,10 @@ app.add_middleware(
 )
 
 # Initialize the database on startup.
-# Honor an explicit TRACELINE_DATABASE_URL (e.g. for Docker volume mounts /
-# local Postgres, per NFR-D-01); otherwise default to backend/traceline.db.
-_db_url = os.environ.get("TRACELINE_DATABASE_URL")
+# Honor an explicit DATABASE_URL (Postgres, common on serverless hosts like
+# Vercel/Neon) or TRACELINE_DATABASE_URL; otherwise default to a local SQLite
+# file for development / tests.
+_db_url = os.environ.get("DATABASE_URL") or os.environ.get("TRACELINE_DATABASE_URL")
 if not _db_url:
     _db_path = os.path.join(BASE_DIR, "..", "traceline.db").replace("\\", "/")
     _db_url = f"sqlite:///{_db_path}"

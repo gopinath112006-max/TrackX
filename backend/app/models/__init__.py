@@ -7,6 +7,7 @@ from app.models.database import (
     Correlation,
     TimelineEntry,
     Relationship,
+    AuditLog,
     get_engine,
     init_db,
 )
@@ -20,6 +21,7 @@ __all__ = [
     "Correlation",
     "TimelineEntry",
     "Relationship",
+    "AuditLog",
     "get_engine",
     "init_db",
 ]
