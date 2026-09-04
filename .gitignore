@@ -6,6 +6,10 @@ __pycache__/
 venv/
 env/
 
+# Vercel-generated Python build artifacts (regenerated from backend/requirements.txt)
+backend/pyproject.toml
+backend/uv.lock
+
 # Node
 node_modules/
 frontend/dist/
@@ -31,3 +35,5 @@ Thumbs.db
 # Local tooling / internal working docs (not part of the submission)
 .sixth/
 XO_CODE_2026_PS3_ANALYSIS.md
+.vercel
+.env*
