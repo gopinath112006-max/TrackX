@@ -1,9 +1,12 @@
 # Render.com blueprint for TraceLine (hackathon prototype).
-# Two free services: a FastAPI/uvicorn API (with SQLite on a persistent disk)
-# and a Vite-preview SPA frontend.
+# Two free services: a FastAPI/uvicorn API and a Vite-preview SPA frontend.
 # Docs: https://render.com/docs/blueprint-spec
+# NOTE: Render free tier has no persistent disks, so the SQLite DB + audit log
+# live in the service's ephemeral filesystem (reset on restart). The full demo
+# works within a running instance; persistence across restarts requires a paid
+# tier or external DB.
 
-databases: []  # SQLite persistent disk is used (no external Postgres required).
+databases: []  # SQLite is used (no external Postgres required on free tier).
 
 services:
   # ---- Backend API -----------------------------------------------------
@@ -16,19 +19,10 @@ services:
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     envVars:
-      # Persistent SQLite DB + audit log live on the disk.
-      - key: TRACELINE_DATABASE_URL
-        value: sqlite:////app/data/traceline.db
-      - key: TRACELINE_AUDIT_LOG
-        value: /app/data/audit.log
-      # Allow the deployed frontend host (default already includes the Render
-      # UI origin in code; kept here for explicit overrides if needed).
+      # SQLite + audit log use the app's default paths (backend/ dir) so no
+      # disk mount is required. Data is ephemeral on free tier.
       - key: TRACELINE_ALLOWED_ORIGINS
         value: https://traceline-ui.onrender.com
-    disk:
-      name: traceline-data
-      mountPath: /app/data
-      sizeGB: 1
 
   # ---- Frontend SPA ----------------------------------------------------
   - type: web
@@ -45,7 +39,3 @@ services:
       # SPA calls hit the API service directly.
       - key: VITE_API_BASE
         value: https://traceline-api.onrender.com
-    disk:
-      name: traceline-ui-cache
-      mountPath: /opt/render/project/.npm-cache
-      sizeGB: 1
