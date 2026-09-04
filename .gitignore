@@ -6,10 +6,10 @@ __pycache__/
 venv/
 env/
 
-# Vercel-generated Python dependency lockfile (regenerated from backend/pyproject.toml)
+# Vercel: keep Python builder in requirements.txt mode (pyproject.toml prevents
+# the FastAPI function from being emitted on Vercel).
+backend/pyproject.toml
 backend/uv.lock
-
-# Vercel-generated Python version marker
 backend/.python-version
 
 # Node

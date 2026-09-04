@@ -1,0 +1,9 @@
+# Keep Vercel's Python builder in requirements.txt mode (pyproject.toml causes
+# the FastAPI function to not be emitted).
+backend/pyproject.toml
+backend/uv.lock
+backend/.python-version
+backend/traceline.db
+backend/audit.log
+backend/.pytest_cache
+backend/tests
