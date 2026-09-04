@@ -9,6 +9,9 @@ env/
 # Vercel-generated Python dependency lockfile (regenerated from backend/pyproject.toml)
 backend/uv.lock
 
+# Vercel-generated Python version marker
+backend/.python-version
+
 # Node
 node_modules/
 frontend/dist/
