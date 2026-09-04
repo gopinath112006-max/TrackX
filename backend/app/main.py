@@ -4,6 +4,7 @@ Attack Story Reconstruction System.
 """
 
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,11 +14,22 @@ from app.routes import evidence, events, investigations, analysis, audit, export
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    # Initialize the database on app startup (at runtime, not import time).
+    # DATABASE_URL / TRACELINE_DATABASE_URL are honored when set (Postgres on
+    # serverless hosts like Vercel); otherwise a local SQLite file is used.
+    init_db()
+    yield
+
+
 app = FastAPI(
     title="Digital Forensics Attack Story Reconstruction System",
     description="Correlates forensic evidence, detects suspicious activity, reconstructs "
                 "attack timelines, and generates human-readable attack stories.",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 # CORS for the frontend. Local dev uses the Vite server on :5173.
@@ -41,16 +53,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Initialize the database on startup.
-# Honor an explicit DATABASE_URL (Postgres, common on serverless hosts like
-# Vercel/Neon) or TRACELINE_DATABASE_URL; otherwise default to a local SQLite
-# file for development / tests.
-_db_url = os.environ.get("DATABASE_URL") or os.environ.get("TRACELINE_DATABASE_URL")
-if not _db_url:
-    _db_path = os.path.join(BASE_DIR, "..", "traceline.db").replace("\\", "/")
-    _db_url = f"sqlite:///{_db_path}"
-init_db(_db_url)
 
 
 @app.get("/api/health", tags=["system"])

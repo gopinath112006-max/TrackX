@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+import os
 from typing import Optional
 
 from sqlalchemy import (
@@ -157,11 +158,26 @@ class AuditLog(Base):
 _engine = None
 
 
-def get_engine(database_url: str = "sqlite:///traceline.db"):
+def _resolve_database_url(explicit: Optional[str] = None) -> str:
+    """Return the effective database URL.
+
+    Precedence: an explicitly passed URL > DATABASE_URL / TRACELINE_DATABASE_URL
+    env vars > SQLite default. This lets the app run against Postgres on
+    serverless hosts (Vercel) where only the env var is available, while
+    keeping a local SQLite fallback for development/tests.
+    """
+    if explicit:
+        return explicit
+    env_url = os.environ.get("DATABASE_URL") or os.environ.get("TRACELINE_DATABASE_URL")
+    return env_url or "sqlite:///traceline.db"
+
+
+def get_engine(database_url: Optional[str] = None):
     global _engine
     if _engine is None:
         # Normalize Windows backslash paths for SQLAlchemy
-        url = database_url.replace("\\", "/") if database_url.startswith("sqlite:///") else database_url
+        url = _resolve_database_url(database_url)
+        url = url.replace("\\", "/") if url.startswith("sqlite:///") else url
         _engine = create_engine(url, echo=False, pool_pre_ping=True)
 
         if url.startswith("sqlite"):
@@ -182,7 +198,7 @@ def reset_engine() -> None:
         _engine = None
 
 
-def init_db(database_url: str = "sqlite:///traceline.db"):
+def init_db(database_url: Optional[str] = None):
     engine = get_engine(database_url)
     Base.metadata.create_all(engine)
     return engine
