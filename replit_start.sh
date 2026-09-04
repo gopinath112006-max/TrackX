@@ -3,14 +3,24 @@
 # also serves the built frontend from the same origin (single web service).
 set -e
 
-echo ">>> Installing backend dependencies..."
-pip install --quiet --upgrade -r backend/requirements.txt
+# Skip re-installs / rebuilds when already present, so every-run startup is
+# fast (deps persist in Replit's package cache across runs).
+if ! python -c "import fastapi, uvicorn, sqlalchemy" 2>/dev/null; then
+  echo ">>> Installing backend dependencies..."
+  pip install --quiet --upgrade -r backend/requirements.txt
+else
+  echo ">>> Backend dependencies already installed (skipping)."
+fi
 
-echo ">>> Building frontend SPA..."
-cd frontend
-npm ci --silent
-npm run build
-cd ..
+if [ ! -f frontend/dist/index.html ]; then
+  echo ">>> Building frontend SPA..."
+  cd frontend
+  npm ci --silent
+  npm run build
+  cd ..
+else
+  echo ">>> Frontend build already present (skipping)."
+fi
 
 echo ">>> Starting uvicorn on port ${PORT:-8000}..."
 cd backend
