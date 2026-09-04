@@ -1,7 +1,17 @@
-# Replit run configuration for TraceLine.
-# Bootstraps dependencies, builds the SPA, and runs the API (which also serves
-# the built frontend from the same origin).
+# Replit App configuration for TraceLine.
+# Single-service app: boots deps, builds the SPA, then runs FastAPI which also
+# serves the built frontend from the same origin.
+
+modules = ["python-3.12", "nodejs-20"]
+
+# Default file shown in the editor.
 entrypoint = "replit_start.sh"
 
-[run]
-command = "bash replit_start.sh"
+# Workspace "Run" button command (executed via sh -c).
+run = "bash replit_start.sh"
+
+# Deployment configuration (Replit Deployments / Autoscale).
+[deployment]
+run = ["bash", "replit_start.sh"]
+build = ["bash", "-c", "cd frontend && npm ci && npm run build"]
+ignorePorts = false
