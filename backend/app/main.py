@@ -21,12 +21,18 @@ app = FastAPI(
 )
 
 # CORS for the frontend. Local dev uses the Vite server on :5173.
-# For cloud/Docker deploys, override via TRACELINE_ALLOWED_ORIGINS (comma-separated).
+# For cloud/Docker/Replit deploys, override via TRACELINE_ALLOWED_ORIGINS
+# (comma-separated). Defaults cover local dev and the deployed Render UI host.
 _allowed_origins_raw = os.environ.get("TRACELINE_ALLOWED_ORIGINS", "")
 _allowed_origins = (
     [o.strip() for o in _allowed_origins_raw.split(",") if o.strip()]
     if _allowed_origins_raw
-    else ["http://localhost:5173", "http://127.0.0.1:5173"]
+    else [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://traceline-ui.onrender.com",
+        "https://traceline-ui.onrender.com/",
+    ]
 )
 app.add_middleware(
     CORSMiddleware,

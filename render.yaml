@@ -1,5 +1,6 @@
 # Render.com blueprint for TraceLine (hackathon prototype).
-# Two services: a FastAPI/uvicorn API and a static SPA frontend.
+# Two free services: a FastAPI/uvicorn API (with SQLite on a persistent disk)
+# and a Vite-preview SPA frontend.
 # Docs: https://render.com/docs/blueprint-spec
 
 databases: []  # SQLite persistent disk is used (no external Postgres required).
@@ -12,7 +13,7 @@ services:
     plan: free
     rootDir: backend
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     envVars:
       # Persistent SQLite DB + audit log live on the disk.
@@ -20,11 +21,10 @@ services:
         value: sqlite:////app/data/traceline.db
       - key: TRACELINE_AUDIT_LOG
         value: /app/data/audit.log
-      # Allow the deployed frontend origin (from DATABASE_URL-style service URL).
-      # Replace <frontend-url> after the UI service is created, or use the
-      # value below and set explicitly on first deploy.
+      # Allow the deployed frontend host (default already includes the Render
+      # UI origin in code; kept here for explicit overrides if needed).
       - key: TRACELINE_ALLOWED_ORIGINS
-        sync: false
+        value: https://traceline-ui.onrender.com
     disk:
       name: traceline-data
       mountPath: /app/data
@@ -38,13 +38,13 @@ services:
     rootDir: frontend
     buildCommand: npm ci && npm run build
     # Vite preview serves the built SPA with client-side routing fallback.
-    startCommand: npx vite preview --host 0.0.0.0 --port 10000
+    startCommand: npx vite preview --host 0.0.0.0 --port $PORT
     healthCheckPath: /
     envVars:
-      # The deployed backend URL (set to https://traceline-api.onrender.com).
-      # Baked into the bundle at build time so '../api' calls hit the API host.
+      # The deployed backend API host. Baked into the bundle at build time so
+      # SPA calls hit the API service directly.
       - key: VITE_API_BASE
-        sync: false
+        value: https://traceline-api.onrender.com
     disk:
       name: traceline-ui-cache
       mountPath: /opt/render/project/.npm-cache
