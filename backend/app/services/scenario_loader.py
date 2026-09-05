@@ -1,21 +1,33 @@
 """Scenario data loader."""
 import json
 import os
-from typing import Dict, List
+from typing import Dict, List, Optional
 
-SCENARIOS_DIR = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "data", "scenarios"
-)
-SCENARIOS_DIR = os.path.abspath(SCENARIOS_DIR)
+_SERVICES_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def _scenarios_dir() -> Optional[str]:
+    """Return the first existing scenarios directory.
+
+    Prefer the bundled location (backend/data/scenarios) used when the
+    backend is deployed as a Vercel service whose root is backend/, then
+    fall back to the legacy repo-root data/scenarios path.
+    """
+    for rel in ("..", "..", "data", "scenarios"), ("..", "..", "..", "data", "scenarios"):
+        candidate = os.path.abspath(os.path.join(_SERVICES_DIR, *rel))
+        if os.path.isdir(candidate):
+            return candidate
+    return None
 
 
 def list_scenarios() -> List[Dict[str, object]]:
     """Return metadata for all available demo scenarios."""
     scenarios = []
-    if not os.path.isdir(SCENARIOS_DIR):
+    scenarios_dir = _scenarios_dir()
+    if not scenarios_dir:
         return scenarios
-    for entry in sorted(os.listdir(SCENARIOS_DIR)):
-        dir_path = os.path.join(SCENARIOS_DIR, entry)
+    for entry in sorted(os.listdir(scenarios_dir)):
+        dir_path = os.path.join(scenarios_dir, entry)
         if not os.path.isdir(dir_path):
             continue
         meta_path = os.path.join(dir_path, "scenario.json")
@@ -76,7 +88,10 @@ def get_scenario_files(scenario_id: str) -> List[Dict[str, str]]:
 
 
 def _scenario_dir(scenario_id: str):
-    path = os.path.join(SCENARIOS_DIR, scenario_id)
+    scenarios_dir = _scenarios_dir()
+    if not scenarios_dir:
+        return None
+    path = os.path.join(scenarios_dir, scenario_id)
     return path if os.path.isdir(path) else None
 
 
