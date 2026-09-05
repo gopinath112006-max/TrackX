@@ -28,8 +28,17 @@ from app.utils.helpers import safe_json_dumps
 
 def persist_analysis(db: Session, investigation_id: int, result: Dict[str, object]) -> None:
     """Write all analysis products for an investigation into SQLite (replace)."""
+    # Use synchronize_session="fetch" so rows deleted at the DB level are also
+    # expunged from the session's identity map. Without it, previously-loaded
+    # ORM objects keep their identities, and SQLite reuses their freed rowids
+    # for the new inserts below, causing the SQLAlchemy identity-map collision
+    # warning ("Identity map already had an identity for ...") on commit.
     for model in (Finding, Correlation, TimelineEntry, Relationship):
-        db.execute(delete(model).where(model.investigation_id == investigation_id))
+        db.execute(
+            delete(model)
+            .where(model.investigation_id == investigation_id)
+            .execution_options(synchronize_session="fetch")
+        )
 
     for f in result.get("findings", []):
         db.add(Finding(
