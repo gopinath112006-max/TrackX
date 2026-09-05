@@ -1,8 +1,0 @@
-# Non-runtime files to exclude from the backend Vercel project bundle.
-__pycache__/
-.pytest_cache/
-tests/
-traceline.db
-audit.log
-.vercel/
-*.pyc
