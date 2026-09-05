@@ -169,7 +169,14 @@ def _resolve_database_url(explicit: Optional[str] = None) -> str:
     if explicit:
         return explicit
     env_url = os.environ.get("DATABASE_URL") or os.environ.get("TRACELINE_DATABASE_URL")
-    return env_url or "sqlite:///traceline.db"
+    if env_url:
+        return env_url
+    # Serverless hosts (Vercel) expose a read-only filesystem except /tmp.
+    # Without a DATABASE_URL, writing "traceline.db" next to the code would
+    # crash startup, so fall back to a /tmp SQLite file instead.
+    if os.environ.get("VERCEL"):
+        return "sqlite:////tmp/traceline.db"
+    return "sqlite:///traceline.db"
 
 
 def get_engine(database_url: Optional[str] = None):
